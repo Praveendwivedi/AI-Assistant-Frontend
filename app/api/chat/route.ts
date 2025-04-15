@@ -7,7 +7,7 @@ import type { NextRequest } from 'next/server';
 export const maxDuration = 30;
 
 const groq = new Groq({
-	apiKey: process.env.GROQ_API_KEY,
+	apiKey: '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',
 	baseURL: 'https://api.groq.com',
 });
 
