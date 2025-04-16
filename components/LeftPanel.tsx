@@ -7,6 +7,7 @@ import {
 	createClient,
   } from "@deepgram/sdk";
   import Recording from "./recording.svg";
+import GrowqAgentResponse from "@/app/groq";
 
 interface LeftPanelProps {
 isMonitoring: boolean;
@@ -234,11 +235,11 @@ return (
 						: "** Realtime transcription by Deepgram **"}
 				</div>
 			</div>
-			{/* <GrowqAgentResponse
+			<GrowqAgentResponse
 				caption={caption}
 				isFinal={isFinal}
 				deepgram={deepgram}
-			/> */}
+			/>
 		</div>
 	</div>
 );
