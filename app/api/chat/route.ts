@@ -18,10 +18,21 @@ export async function POST(req: NextRequest) {
 			messages: ChatCompletionMessageParam[];
 		};
 
-		console.log('messsages:', messages);
+		// Append the system prompt to the messages array
+		const systemPrompt: ChatCompletionMessageParam = {
+			role: 'system',
+			content:
+				"You are an AI Assistant who helps users to install softwares, " +
+				"your answers should be very short, one sentence max, and to the point.",
+		};
+
+		const updatedMessages = [systemPrompt, ...messages];
+
+		console.log('Updated messages:', updatedMessages);
+
 		const res = await groq.chat.completions.create({
 			model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-			messages,
+			messages: updatedMessages,
 			temperature: 1,
 			max_completion_tokens: 1024,
 			top_p: 1,
