@@ -79,9 +79,13 @@ APIs: GROQ
 Hosting: Vercel
 
 Sponsor Technologies Used (if any):
-✅ Groq:- 
+✅ Groq:- We used Groq to interpret user prompts and convert natural language commands into executable actions, enhancing the user experience through intelligent intent recognition.
  
-✅ Screenpipe:-
+✅ Screenpipe:- Terminator was integrated as the terminal emulator to execute those commands efficiently
+
+Together, they enable seamless app installations and task automation based on user inputs, providing a more intuitive and functional interface.
+
+
 
 ✨ Key Features
 Absolutely! Here's a more professional version of your project's key features, suitable for documentation, presentations, or submissions:
