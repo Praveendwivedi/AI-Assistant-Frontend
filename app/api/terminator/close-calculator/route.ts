@@ -6,7 +6,7 @@ export async function GET() {
 
     try {
         const calculatorWindow = client.locator("window:Calculator");
-        await calculatorWindow.pressKey("%{F4}"); // Alt+F4 on Windows
+        await calculatorWindow.pressKey("{Alt}{F4}"); // Alt+F4 on Windows
         return NextResponse.json({ success: true, message: "Calculator closed successfully" });
     } catch (error) {
         return NextResponse.json({ success: false, error: error instanceof Error ? error.message : "Unknown error" });

@@ -1,5 +1,10 @@
 import ReactMarkdown from 'react-markdown';
 import { Message } from '@/hooks/useChat';
+import { it } from 'node:test';
+import {getOpenApp} from '@/lib/parseInstructions';
+import { useInstructionParser } from '@/hooks/useInstructionParser';
+import { m } from 'framer-motion';
+import { useEffect } from 'react';
 
 interface RightPanelProps {
     rawMessages: Message[];
@@ -20,6 +25,43 @@ export default function RightPanel({
     input,
     setImagePreview,
 }: RightPanelProps) {
+
+    console.log("Texts : ",rawMessages.map((m) => m.content).join('\n\n'));
+    const { shell, app, commands } = useInstructionParser(rawMessages[rawMessages.length - 1]?.content as string);
+    console.log("Shell : ", shell);
+    console.log("App : ", app);
+    console.log("Commands : ", commands);
+    
+    useEffect(() => {
+        const runActions = async () => {
+          try {
+            if (shell ) {
+              console.log('Opening App:', app);
+              const res = await fetch("/api/execute-cmd", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ command: commands[0] }),
+              });
+              const result = await res.json();
+              console.log('App Result:', result);
+              handleInputChange({
+                target: { value: result.data.text },
+              } as React.ChangeEvent<HTMLInputElement>);
+        
+                handleSubmit(new Event('submit') as unknown as React.FormEvent);
+
+            }
+          } catch (err) {
+            console.error('Error opening app:', err);
+          }
+        };
+      
+        runActions();
+      }, [shell,commands]);
+      
+    
+
+
     return (
         <div className="lg:col-span-2 space-y-4">
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm h-full">
@@ -27,44 +69,53 @@ export default function RightPanel({
                     How can I help you?
                 </h2>
                 <div className="jarvis-message-area bg-gray-50 p-4 mb-4 rounded-lg border border-gray-200">
-                    {/* Render Messages */}
-                    {rawMessages.length > 0 ? (
-                        rawMessages.map((m, index) => (
-                            <div className="mb-3 last:mb-0" key={index}>
-                                <div
-                                    className={`inline-block px-4 py-2 rounded-xl max-w-[80%] ${
-                                        m.role === 'user'
-                                            ? 'bg-blue-500 text-white rounded-br-none'
-                                            : 'bg-gray-100 text-gray-800 rounded-bl-none'
-                                    }`}
-                                >
-                                    {Array.isArray(m.content)
-                                        ? m.content.map((item, idx) => (
-                                                <div key={idx}>
-                                                    {item.type === 'text' && (
-                                                        <ReactMarkdown>{item.text}</ReactMarkdown>
-                                                    )}
-                                                    {item.type === 'image_url' && item.image_url?.url && (
-                                                        <img
-                                                            src={item.image_url.url}
-                                                            alt="Uploaded"
-                                                            className="mt-2 max-w-full rounded-lg"
-                                                        />
-                                                    )}
-                                                </div>
-                                          ))
-                                        : typeof m.content === 'string'
-                                        ? <ReactMarkdown>{m.content}</ReactMarkdown>
-                                        : JSON.stringify(m.content)}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="flex flex-col items-center justify-center py-12">
-                            <p className="text-gray-500">No conversation yet</p>
-                        </div>
-                    )}
+  {rawMessages.length > 0 ? (
+    rawMessages.map((m, index) => (
+      // 1) Wrap each message in a flex container:
+      <div
+        key={index}
+        className={`mb-3 last:mb-0 flex ${
+          m.role === 'user' ? 'justify-end' : 'justify-start'
+        }`}
+      >
+        {/* 2) Inner bubble */}
+        <div
+          className={`
+            inline-block px-4 py-2 rounded-xl max-w-[80%]
+            ${m.role === 'user'
+              ? 'bg-blue-500 text-white rounded-br-none'
+              : 'bg-gray-100 text-gray-800 rounded-bl-none'}
+          `}
+        >
+          {/* 3) Render text or images */}
+          {Array.isArray(m.content)
+            ? m.content.map((item, idx) => (
+                <div key={idx}>
+                  {item.type === 'text' && (
+                    <ReactMarkdown>{item.text}</ReactMarkdown>
+                  )}
+                  {item.type === 'image_url' && item.image_url?.url && (
+                    <img
+                      src={item.image_url.url}
+                      alt="Uploaded"
+                      className="mt-2 max-w-full rounded-lg"
+                    />
+                  )}
                 </div>
+              ))
+            : typeof m.content === 'string'
+            ? <ReactMarkdown>{m.content}</ReactMarkdown>
+            : JSON.stringify(m.content)}
+        </div>
+      </div>
+    ))
+  ) : (
+    <div className="flex flex-col items-center justify-center py-12">
+      <p className="text-gray-500">No conversation yet</p>
+    </div>
+  )}
+</div>
+
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-3">
