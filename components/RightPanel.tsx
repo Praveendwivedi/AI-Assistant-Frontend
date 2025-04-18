@@ -32,7 +32,7 @@ export default function RightPanel({
 			} as React.ChangeEvent<HTMLInputElement>);
 
 			// Automatically submit the form if isFinal is true
-			if (isFinal) {
+			if (caption?.toLowerCase().includes('enter') && isFinal) {
 				handleSubmit(new Event('submit') as unknown as React.FormEvent);
 			}
 		}

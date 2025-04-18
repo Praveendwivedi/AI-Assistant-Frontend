@@ -7,7 +7,7 @@ import {
 	createClient,
 } from '@deepgram/sdk';
 import Recording from './recording.svg';
-import GrowqAgentResponse from '@/app/groq';
+
 
 interface LeftPanelProps {
 	isMonitoring: boolean;
