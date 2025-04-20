@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat } from '@/hooks/useChat';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import LeftPanel from '@/components/LeftPanel';
 import RightPanel from '@/components/RightPanel';
@@ -23,7 +23,43 @@ export default function JarvisAssistant() {
 	const [caption, setCaption] = useState<string | null>(null);
 	const [isFinal, setIsFinal] = useState(false);
 
+	// useEffect(() => {
+	// 	// whenever rawMessages changes…
+	// 	const last = rawMessages[rawMessages.length - 1];
+	// 	if (last?.role !== 'assistant') return;
+	   
+	// 	// coerce content to a single string
+	// 	const text = typeof last.content === 'string'
+	// 	  ? last.content
+	// 	  : last.content
+	// 		 .filter(c => c.type === 'text')
+	// 		 .map(c => (c as any).text)
+	// 		 .join(' ');
+	   
+	// 	// look for **your-command-here**
+	// 	const cmd = text.match(/\*\*(.*?)\*\*/)?.[1]?.trim();
+	// 	if (!cmd) return;
+	   
+	// 	// fire it off
+	// 	fetch('/api/execute-cmd', {
+	// 	  method: 'POST',
+	// 	  headers: { 'Content-Type': 'application/json' },
+	// 	  body: JSON.stringify({ command: cmd }),
+	// 	})
+	// 	  .then(r => r.json())
+	// 	  .then(d => {
+	// 	    if (d.success) console.log('CMD ran:', cmd);
+	// 	    else console.error('CMD failed:', d.error);
+	// 	  })
+	// 	  .catch(console.error);
+	//    }, [rawMessages]);
+	   
+
+
+	// Function to handle the caption input change	
 	// API Call Functions
+	
+	
 	const openCalculator = async () => {
 		try {
 			console.log('Opening calculator...');

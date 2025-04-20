@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import { Message } from '@/hooks/useChat';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { handleResponse } from '@/hooks/useTerminator';
 
 interface RightPanelProps {
 	rawMessages: Message[];
@@ -25,6 +26,116 @@ export default function RightPanel({
 	caption,
 	isFinal,
 }: RightPanelProps) {
+
+	const [lastAiMessage, setLastAiMessage] = useState<String | null>(rawMessages[rawMessages.length - 1]?.role == 'assistant' ? rawMessages[rawMessages.length - 1].content as string : null );
+
+
+	// useEffect(() => {
+	// 	function validateInstruction(text: string) {
+	// 		const patterns = [
+	// 		  {
+	// 		    type: 'openApp',
+	// 		    // matches "OPEN APP <anything…>"  ⇒ match[1] = the app name (can include spaces)
+	// 		    regex: /^\s*OPEN APP\s+(.+)$/i,
+	// 		  },
+	// 		  {
+	// 		    type: 'openUrl',
+	// 		    // matches "OPEN URL http(s)://<no‑spaces>" ⇒ match[1] = the URL
+	// 		    regex: /^\s*OPEN URL\s+(https?:\/\/\S+)$/i,
+	// 		  },
+	// 		  {
+	// 		    type: 'commandPrompt',
+	// 		    // matches exactly "OPEN COMMAND PROMPT"       ⇒ no capture group
+	// 		    regex: /^\s*OPEN COMMAND PROMPT\s*$/i,
+	// 		  },
+	// 		  {
+	// 		    type: 'highlightCommand',
+	// 		    // matches "**anything**"                      ⇒ match[1] = anything
+	// 		    regex: /\*\*(.+?)\*\*/,
+	// 		  },
+	// 		];
+		   
+	// 		const result = {
+	// 		  isValid: false,
+	// 		  type: '' as string,
+	// 		  extracted: '' as string,
+	// 		};
+		   
+	// 		for (const { type, regex } of patterns) {
+	// 		  const match = text?.match(regex);
+	// 		  if (match) {
+	// 		    result.isValid = true;
+	// 		    result.type = type;
+	// 		    // only assign extracted if there *is* a capture group
+	// 		    if (match[1]) result.extracted = match[1].trim();
+	// 		    break;
+	// 		  }
+	// 		}
+		   
+	// 		return result;
+	// 	   }
+		   
+	// 	   let result = validateInstruction(lastAiMessage as string );
+	// 	   console.log("Validation Result:", result);
+	//    }, [lastAiMessage]);
+
+
+	   // useEffect(() => {
+	// 	// whenever rawMessages changes…
+	// 	const last = rawMessages[rawMessages.length - 1];
+	// 	if (last?.role !== 'assistant') return;
+	   
+	// 	// coerce content to a single string
+	// 	const text = typeof last.content === 'string'
+	// 	  ? last.content
+	// 	  : last.content
+	// 		 .filter(c => c.type === 'text')
+	// 		 .map(c => (c as any).text)
+	// 		 .join(' ');
+	   
+	// 	// look for **your-command-here**
+	// 	const cmd = text.match(/\*\*(.*?)\*\*/)?.[1]?.trim();
+	// 	if (!cmd) return;
+	   
+	// 	// fire it off
+	// 	fetch('/api/execute-cmd', {
+	// 	  method: 'POST',
+	// 	  headers: { 'Content-Type': 'application/json' },
+	// 	  body: JSON.stringify({ command: cmd }),
+	// 	})
+	// 	  .then(r => r.json())
+	// 	  .then(d => {
+	// 	    if (d.success) console.log('CMD ran:', cmd);
+	// 	    else console.error('CMD failed:', d.error);
+	// 	  })
+	// 	  .catch(console.error);
+	//    }, [rawMessages]);
+	   
+
+
+	// Function to handle the caption input change	
+	// API Call Functions
+	
+	useEffect(() => {
+
+				const lastMessageContent = rawMessages[rawMessages.length - 1]?.content;
+				if (typeof lastMessageContent === 'string') {
+					handleResponse(lastMessageContent);
+				}
+			
+	},[rawMessages]);
+
+
+	useEffect(() => {
+		if (rawMessages.length > 0) {
+			const lastMessage = rawMessages[rawMessages.length - 1];
+			if (lastMessage.role === 'assistant') {
+				setLastAiMessage(lastMessage.content as string);
+			}
+		}
+		console.log("Raw Messages:", rawMessages);
+	},[rawMessages]);
+
 	useEffect(() => {
 		if (caption) {
 			handleInputChange({
@@ -48,7 +159,12 @@ export default function RightPanel({
 					{/* Render Messages */}
 					{rawMessages.length > 0 ? (
 						rawMessages.map((m, index) => (
-							<div className="mb-3 last:mb-0" key={index}>
+							<div
+								className={`mb-3 last:mb-0 flex ${
+									m.role === 'user' ? 'justify-end' : 'justify-start'
+								}`}
+								key={index}
+							>
 								<div
 									className={`inline-block px-4 py-2 rounded-xl max-w-[80%] ${
 										m.role === 'user'
@@ -72,7 +188,28 @@ export default function RightPanel({
 											</div>
 										))
 									) : typeof m.content === 'string' ? (
-										<ReactMarkdown>{m.content}</ReactMarkdown>
+										(() => {
+											try {
+												// Parse the JSON string
+												const parsedContent = JSON.parse(m.content);
+
+												// Check if 'steps' exists and is an array
+												if (parsedContent.steps && Array.isArray(parsedContent.steps)) {
+													return (
+														<ul className="list-disc pl-5">
+															{parsedContent.steps.map((step: string, idx: number) => (
+																<li key={idx}>{step}</li>
+															))}
+														</ul>
+													);
+												} else {
+													return <p>No steps available.</p>;
+												}
+											} catch (error) {
+												console.error('Failed to parse content:', error);
+												return <p>Invalid content format.</p>;
+											}
+										})()
 									) : (
 										JSON.stringify(m.content)
 									)}
