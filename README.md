@@ -7,6 +7,7 @@
 ---
 
 ## 📌 Problem Statement
+
 **Problem Statement 3 – Weave AI magic with Groq**
 
 **Problem Statement 5 – Build the Future of AI Computer Control with Screenpipe - Terminator**
@@ -18,6 +19,7 @@
 Installing applications and executing system-level actions often require manual effort, technical know-how, and time. For non-technical users or busy professionals, this process can be inefficient, confusing, or error-prone.
 
 **Real-world Use Case:**
+
 > "Install VS Code and set it up for Python development."
 >
 > "Run the server and check logs."
@@ -25,6 +27,7 @@ Installing applications and executing system-level actions often require manual 
 **Who it serves:** Everyday users, developers, and IT professionals looking for a smarter, easier way to interact with their systems.
 
 **Value:**
+
 - Saves time and effort with AI-powered automation
 - Bridges the gap for non-technical users
 - Streamlines repetitive tasks for developers
@@ -34,16 +37,19 @@ Installing applications and executing system-level actions often require manual 
 
 ## 🧠 Team & Approach
 
-### Team Name:  
+### Team Name:
+
 KRATOS
 
-### Team Members:  
-- Praveen Dwivedi ([GitHub](https://github.com/Praveendwivedi) / [LinkedIn](https://www.linkedin.com/in/dwivedipraveen/))  
-- Tushar Suthar ([GitHub](https://github.com/tusharsuthar1256) / [LinkedIn](https://www.linkedin.com/in/tushar-suthar-469163260/))  
-- Shatakshi Gupta ([GitHub](https://github.com/Shatakshi-gupta-ggits) / [LinkedIn](https://www.linkedin.com/in/shatakshi1/))  
+### Team Members:
+
+- Praveen Dwivedi ([GitHub](https://github.com/Praveendwivedi) / [LinkedIn](https://www.linkedin.com/in/dwivedipraveen/))
+- Tushar Suthar ([GitHub](https://github.com/tusharsuthar1256) / [LinkedIn](https://www.linkedin.com/in/tushar-suthar-469163260/))
+- Shatakshi Gupta ([GitHub](https://github.com/Shatakshi-gupta-ggits) / [LinkedIn](https://www.linkedin.com/in/shatakshi1/))
 - Payal Sharma ([GitHub](https://github.com/payalgit13) / [LinkedIn](https://www.linkedin.com/in/payal-sharma-366748259/))
 
 ### Our Approach:
+
 - Identified the common frustration of manual installations and command-line complexities
 - Leveraged AI to interpret and act on user commands
 - Faced challenges with command validation, secure execution, and integration with Terminator
@@ -53,14 +59,39 @@ KRATOS
 
 ## 🛠️ Tech Stack
 
-### Core Technologies Used:
-- **Frontend:** Next.js,Tailwind CSS,Framer Motion,Radix UI
-- **Backend:** Terminator,AI SDK,Groq SDK,Zod
-- **Hosting:** Vercel
+### 💻 Frontend
 
-### Sponsor Technologies Used:
-- [x] **Groq:** Used to parse user input into structured task flows
-- [x] **Terminator:** Used to execute system-level actions securely
+- React.js
+- Next.js
+- Tailwind CSS
+- Framer Motion
+- Radix UI
+
+### ⚙️ Backend
+
+- Terminator (for system-level command execution)
+- AI SDK (OpenAI, Ollama)
+- Groq SDK
+- Zod (schema validation)
+
+### 🧰 APIs & Tools
+
+- Screenpipe (screen-based automation and analytics)
+- AI SDK
+- CMDK
+
+### 💾 Database
+
+- Not applicable (currently no DB layer used, future scope may include this)
+
+### 📊 Hosting
+
+- Vercel
+
+### ☑️ Sponsor Technologies Used:
+
+- [✅] **Groq:** Used to parse user input into structured task flows
+- [✅] **Terminator:** Used to execute system-level actions securely
 
 ---
 
@@ -76,7 +107,7 @@ KRATOS
 
 ---
 
-## 📽️ Demo & Deliverables
+## 📟️ Demo & Deliverables
 
 - **Demo Video Link:** [Add Link]
 - **Pitch Deck / PPT Link:** [Add Link]
@@ -91,16 +122,18 @@ KRATOS
 
 ---
 
-## 🧲 How to Run the Project
+## 🩒 How to Run the Project
 
 ### Requirements:
+
 - Node.js v18+
 - npm
 
 ### Local Setup:
 
-``` Frontend (OpenAI-based UI)
- 
+#### 🔹 Frontend (OpenAI-based UI)
+
+```bash
 # Clone the repo
 git clone https://github.com/Praveendwivedi/AI-Assistant-Frontend.git
 cd install-it.ai
@@ -112,9 +145,13 @@ npm install
 
 # Start development server
 npm run dev
+```
 
-Open your browser and visit `http://localhost:3000`
-🔹 Backend (Terminator Server)
+Visit `http://localhost:3000` in your browser.
+
+#### 🔹 Backend (Terminator Server)
+
+```bash
 # Open Terminator project directory
 
 # Setup for Windows (run only once)
@@ -122,15 +159,16 @@ Open your browser and visit `http://localhost:3000`
 
 # Start server in debug mode
 ./server_release/server.exe --debug
+```
 
-For command-line tasks, ensure terminal access with appropriate permissions (e.g., sudo).
+Ensure proper terminal/command-line permissions while executing.
 
 ---
 
 ## 🧬 Future Scope
 
 - 📈 More integrations (cloud platforms, enterprise software)
-- 🛡️ Advanced permission management and encryption
+- 🔧 Advanced permission management and encryption
 - 🌐 Localization (multi-language) & accessibility enhancements
 - 🎧 Voice assistant integration (Alexa, Siri, Google Assistant)
 - 📊 Visual task chaining and real-time monitoring
@@ -141,6 +179,7 @@ For command-line tasks, ensure terminal access with appropriate permissions (e.g
 
 - **GROQ:** For AI command structuring
 - **Terminator:** For system-level automation
+- **Screenpipe (HackHazards):** Platform context and use-case inspiration
 - **Namespace Community:** Mentorship and event support
 
 ---
