@@ -54,9 +54,8 @@ KRATOS
 ## 🛠️ Tech Stack
 
 ### Core Technologies Used:
-- **Frontend:** React.js, Tailwind CSS
-- **Backend:** Next.js
-- **APIs:** GROQ
+- **Frontend:** Next.js,Tailwind CSS,Framer Motion,Radix UI
+- **Backend:** Terminator,AI SDK,Groq SDK,Zod
 - **Hosting:** Vercel
 
 ### Sponsor Technologies Used:
@@ -131,7 +130,6 @@ For command-line tasks, ensure terminal access with appropriate permissions (e.g
 
 - **GROQ:** For AI command structuring
 - **Terminator:** For system-level automation
-- **Screenpipe (HackHazards):** Platform context and use-case inspiration
 - **Namespace Community:** Mentorship and event support
 
 ---
