@@ -74,11 +74,6 @@ KRATOS
 - Groq SDK
 - Zod (schema validation)
 
-### 🧰 APIs & Tools
-
-- Screenpipe (screen-based automation and analytics)
-- AI SDK
-- CMDK
 
 ### 💾 Database
 
@@ -179,7 +174,6 @@ Ensure proper terminal/command-line permissions while executing.
 
 - **GROQ:** For AI command structuring
 - **Terminator:** For system-level automation
-- **Screenpipe (HackHazards):** Platform context and use-case inspiration
 - **Namespace Community:** Mentorship and event support
 
 ---
