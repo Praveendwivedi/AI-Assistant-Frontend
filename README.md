@@ -98,19 +98,30 @@ KRATOS
 - npm
 
 ### Local Setup:
-```bash
+
+``` Frontend (OpenAI-based UI)
+ 
 # Clone the repo
 git clone https://github.com/Praveendwivedi/AI-Assistant-Frontend.git
 cd install-it.ai
 
-# Install dependencies
+# Create a .env file and add required API keys
+
+# Install dependencies (run only once)
 npm install
 
 # Start development server
 npm run dev
-```
 
 Open your browser and visit `http://localhost:3000`
+🔹 Backend (Terminator Server)
+# Open Terminator project directory
+
+# Setup for Windows (run only once)
+./setup_windows.ps1
+
+# Start server in debug mode
+./server_release/server.exe --debug
 
 For command-line tasks, ensure terminal access with appropriate permissions (e.g., sudo).
 
