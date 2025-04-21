@@ -32,7 +32,7 @@ Provides a natural, assistant-like experience—making complex tasks feel effort
 Team Name: KRATOS 
 
 Team Members:
-1.Praveen Dwivedi - (https://github.com/Praveendwivedi)/ (https://www.linkedin.com/in/dwivedipraveen/),
+1.Praveen Dwivedi - (https://github.com/Praveendwivedi/)  (https://www.linkedin.com/in/dwivedipraveen/),
 
 
 2.Tushar Suthar - (https://github.com/tusharsuthar1256),(https://www.linkedin.com/in/tushar-suthar-469163260/)
@@ -73,7 +73,7 @@ During brainstorming, we realized the potential to make the assistant conversati
 Tech Stack
 
 Frontend - Tailwang CSS,React.js
-Backend -Next.js,python
+Backend -Next.js,
 Database: 
 APIs: GROQ
 Hosting: Vercel
@@ -85,10 +85,6 @@ Sponsor Technologies Used (if any):
 
 Together, they enable seamless app installations and task automation based on user inputs, providing a more intuitive and functional interface.
 
-
-
-✨ Key Features
-Absolutely! Here's a more professional version of your project's key features, suitable for documentation, presentations, or submissions:
 
 🔑 Key Features
 Natural Language Command Processing
