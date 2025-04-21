@@ -35,13 +35,16 @@ Team Members:
 1.Praveen Dwivedi - (https://github.com/Praveendwivedi/)  (https://www.linkedin.com/in/dwivedipraveen/),
 
 
-2.Tushar Suthar - (https://github.com/tusharsuthar1256),(https://www.linkedin.com/in/tushar-suthar-469163260/)
+2.Tushar Suthar - (https://github.com/tusharsuthar1256)
+(https://www.linkedin.com/in/tushar-suthar-469163260/)
 
 
-3.Shatakshi Gupta - (https://github.com/Shatakshi-gupta-ggits),(https://www.linkedin.com/in/shatakshi1/)
+3.Shatakshi Gupta - (https://github.com/Shatakshi-gupta-ggits)
+(https://www.linkedin.com/in/shatakshi1/)
 
 
-4.Payal Sharma - (https://github.com/payalgit13),(https://www.linkedin.com/in/payal-sharma-366748259/)
+4.Payal Sharma - (https://github.com/payalgit13)
+(https://www.linkedin.com/in/payal-sharma-366748259/)
 
 Our Approach:
 💡 Why We Chose This Problem
