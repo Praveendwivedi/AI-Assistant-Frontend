@@ -85,9 +85,9 @@ KRATOS
 
 ## ✅ Tasks & Bonus Checklist
 
-- [x] **All members completed the mandatory task - Followed social channels and filled the form**
-- [x] **Bonus Task 1 - Shared badges and filled the form (2 points)**
-- [x] **Bonus Task 2 - Signed up for Sprint.dev and filled the form (3 points)**
+- [✅] **All members completed the mandatory task - Followed social channels and filled the form**
+- [✅] **Bonus Task 1 - Shared badges and filled the form **
+- [✅] **Bonus Task 2 - Signed up for Sprint.dev and filled the form **
 
 ---
 
