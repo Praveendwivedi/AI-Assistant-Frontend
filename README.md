@@ -1,115 +1,104 @@
-🚀 INSTALL-IT.AI
+![github-submission-banner](https://github.com/user-attachments/assets/a1493b84-e4e2-456e-a791-ce35ee2bcf2f)
 
-Skip the hassle. Let INSTALL-IT.AI handle it.
+# 🚀 INSTALL-IT.AI
 
-📌 Problem Statement
+> Skip the hassle. Let INSTALL-IT.AI handle it.
 
-Problem Statement 5 – Build the Future of AI Computer Control with Screenpipe - Terminator
+---
 
-🎯 Objective
+## 📌 Problem Statement
+
+**Problem Statement 5 – Build the Future of AI Computer Control with Screenpipe - Terminator**
+
+---
+
+## 🎯 Objective
 
 Installing applications and executing system-level actions often require manual effort, technical know-how, and time. For non-technical users or busy professionals, this process can be inefficient, confusing, or error-prone.
 
-Real-world Use Case:
+**Real-world Use Case:**
+> "Install VS Code and set it up for Python development."
+>
+> "Run the server and check logs."
 
-"Install VS Code and set it up for Python development."
+**Who it serves:** Everyday users, developers, and IT professionals looking for a smarter, easier way to interact with their systems.
 
-"Run the server and check logs."
+**Value:**
+- Saves time and effort with AI-powered automation
+- Bridges the gap for non-technical users
+- Streamlines repetitive tasks for developers
+- Creates a natural, assistant-like experience
 
-Who it serves: Everyday users, developers, and IT professionals looking for a smarter, easier way to interact with their systems.
+---
 
-Value:
+## 🧠 Team & Approach
 
-Saves time and effort with AI-powered automation
-
-Bridges the gap for non-technical users
-
-Streamlines repetitive tasks for developers
-
-Creates a natural, assistant-like experience
-
-🧠 Team & Approach
-
-Team Name:
-
+### Team Name:  
 KRATOS
 
-Team Members:
+### Team Members:  
+- Praveen Dwivedi ([GitHub](https://github.com/Praveendwivedi) / [LinkedIn](https://www.linkedin.com/in/dwivedipraveen/))  
+- Tushar Suthar ([GitHub](https://github.com/tusharsuthar1256) / [LinkedIn](https://www.linkedin.com/in/tushar-suthar-469163260/))  
+- Shatakshi Gupta ([GitHub](https://github.com/Shatakshi-gupta-ggits) / [LinkedIn](https://www.linkedin.com/in/shatakshi1/))  
+- Payal Sharma ([GitHub](https://github.com/payalgit13) / [LinkedIn](https://www.linkedin.com/in/payal-sharma-366748259/))
 
-Praveen Dwivedi (GitHub / LinkedIn)
+### Our Approach:
+- Identified the common frustration of manual installations and command-line complexities
+- Leveraged AI to interpret and act on user commands
+- Faced challenges with command validation, secure execution, and integration with Terminator
+- Breakthrough: Successfully executed multi-step commands hands-free using GROQ + Terminator
 
-Tushar Suthar (GitHub / LinkedIn)
+---
 
-Shatakshi Gupta (GitHub / LinkedIn)
+## 🛠️ Tech Stack
 
-Payal Sharma (GitHub / LinkedIn)
+### Core Technologies Used:
+- **Frontend:** React.js, Tailwind CSS
+- **Backend:** Next.js
+- **APIs:** GROQ
+- **Hosting:** Vercel
 
-Our Approach:
+### Sponsor Technologies Used:
+- [x] **Groq:** Used to parse user input into structured task flows
+- [x] **Terminator:** Used to execute system-level actions securely
 
-Identified the common frustration of manual installations and command-line complexities
+---
 
-Leveraged AI to interpret and act on user commands
+## ✨ Key Features
 
-Faced challenges with command validation, secure execution, and integration with Terminator
+- ✅ AI-powered task parsing from natural language
+- ✅ Automated system actions (open apps, URLs, terminals)
+- ✅ Real-time step tracking
+- ✅ GROQ-based structured command processing
+- ✅ Secure execution using Terminator
+- ✅ Modular, scalable design for future extensions
+- ✅ Seamless integration with Next.js UI
 
-Breakthrough: Successfully executed multi-step commands hands-free using GROQ + Terminator
+---
 
-🛠️ Tech Stack
+## 📽️ Demo & Deliverables
 
-Core Technologies Used:
+- **Demo Video Link:** [Add Link]
+- **Pitch Deck / PPT Link:** [Add Link]
 
-Frontend: React.js, Tailwind CSS
+---
 
-Backend: Next.js
+## ✅ Tasks & Bonus Checklist
 
-APIs: GROQ
+- [x] **All members completed the mandatory task - Followed social channels and filled the form**
+- [x] **Bonus Task 1 - Shared badges and filled the form (2 points)**
+- [x] **Bonus Task 2 - Signed up for Sprint.dev and filled the form (3 points)**
 
-Hosting: Vercel
+---
 
-Sponsor Technologies Used:
+## 🧲 How to Run the Project
 
+### Requirements:
+- Node.js v18+
+- npm
 
-
-✨ Key Features
-
-✅ AI-powered task parsing from natural language
-
-✅ Automated system actions (open apps, URLs, terminals)
-
-✅ Real-time step tracking
-
-✅ GROQ-based structured command processing
-
-✅ Secure execution using Terminator
-
-✅ Modular, scalable design for future extensions
-
-✅ Seamless integration with Next.js UI
-
-📽️ Demo & Deliverables
-
-Demo Video Link: [Add Link]
-
-Pitch Deck / PPT Link: [Add Link]
-
- Tasks & Bonus Checklist
-✅ All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form (Details in Participant Manual)
-✅ All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points) (Details in Participant Manual)
-✅All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points) (Details in Participant Manual)
-
-
-
-
-🧲 How to Run the Project
-
-Requirements:
-
-Node.js v18+
-
-npm
-
-Local Setup:
-
+### Local Setup:
+```bash
 # Clone the repo
 git clone https://github.com/Praveendwivedi/AI-Assistant-Frontend.git
 cd install-it.ai
@@ -119,35 +108,36 @@ npm install
 
 # Start development server
 npm run dev
+```
 
-Open your browser and visit http://localhost:3000
+Open your browser and visit `http://localhost:3000`
 
 For command-line tasks, ensure terminal access with appropriate permissions (e.g., sudo).
 
-🧬 Future Scope
+---
 
-📈 More integrations (cloud platforms, enterprise software)
+## 🧬 Future Scope
 
-🛡️ Advanced permission management and encryption
+- 📈 More integrations (cloud platforms, enterprise software)
+- 🛡️ Advanced permission management and encryption
+- 🌐 Localization (multi-language) & accessibility enhancements
+- 🎧 Voice assistant integration (Alexa, Siri, Google Assistant)
+- 📊 Visual task chaining and real-time monitoring
 
-🌐 Localization (multi-language) & accessibility enhancements
+---
 
-🎧 Voice assistant integration (Alexa, Siri, Google Assistant)
+## 📌 Resources / Credits
 
-📊 Visual task chaining and real-time monitoring
+- **GROQ:** For AI command structuring
+- **Terminator:** For system-level automation
+- **Screenpipe (HackHazards):** Platform context and use-case inspiration
+- **Namespace Community:** Mentorship and event support
 
-📌 Resources / Credits
+---
 
-GROQ: For AI command structuring
-
-Terminator: For system-level automation
-
-Screenpipe (HackHazards): Platform context and use-case inspiration
-
-Namespace Community: Mentorship and event support
-
-🏁 Final Words
+## 🏁 Final Words
 
 HackHazards'25 has been an incredible journey. From system-level scripting to designing a voice-controlled AI, we learned, iterated, and celebrated every little win. Huge thanks to the Namespace community for the amazing platform, mentorship, and camaraderie.
 
 Let's keep building the future of AI computer control! 🤖
+
