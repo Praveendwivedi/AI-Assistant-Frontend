@@ -7,7 +7,7 @@
 ---
 
 ## 📌 Problem Statement
-Problem Statement 3 – Create a weave magic with Groq
+**Problem Statement 3 – Weave AI magic with Groq**
 
 **Problem Statement 5 – Build the Future of AI Computer Control with Screenpipe - Terminator**
 
