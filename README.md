@@ -61,7 +61,6 @@ KRATOS
 
 ### 💻 Frontend
 
-- React.js
 - Next.js
 - Tailwind CSS
 - Framer Motion
@@ -69,10 +68,10 @@ KRATOS
 
 ### ⚙️ Backend
 
-- Terminator (for system-level command execution)
-- AI SDK (OpenAI, Ollama)
+- Terminator
+- AI SDK
 - Groq SDK
-- Zod (schema validation)
+- Zod
 
 
 ### 💾 Database
