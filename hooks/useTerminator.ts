@@ -1,7 +1,7 @@
 export async function handleResponse(responseString: string) {
 
-     // const responseString = '{"action":"open_app","target":"WhatsApp","parameters":{},"steps":["Click on the WhatsApp icon on your desktop or mobile device","If not installed, download and install WhatsApp from the official website or app store"]}'
 
+    console.log("Response String: ",responseString);
      const responseObject = JSON.parse(responseString); 
      console.log("Use Terminator : ",responseObject);
 
@@ -47,13 +47,13 @@ export async function handleResponse(responseString: string) {
                       });
      
                       const data = await response.json();
-     
-                      if (response.ok) {
-                         console.log('Command executed successfully:', data);
-                         
-                      } else {
-                         console.log('Error executing command:', data.error);
-                      }
+                    
+             if (response.ok) {
+              console.log('Command executed successfully:', data);
+             
+            } else {
+              console.log('Error executing command:', data.error);
+            }
                  } catch (error) {
                   console.error('Error opening URL:', error);
                  }
@@ -79,7 +79,7 @@ export async function handleResponse(responseString: string) {
 
              if (response.ok) {
                console.log('Command executed successfully:', data);
-               
+              
              } else {
                console.log('Error executing command:', data.error);
              }
@@ -102,10 +102,10 @@ export async function handleResponse(responseString: string) {
                   });
      
                   const data = await response.json();
-     
+             
                   if (response.ok) {
                     console.log('Command executed successfully:', data);
-                    
+                   
                   } else {
                     console.log('Error executing command:', data.error);
                   }

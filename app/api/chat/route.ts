@@ -11,6 +11,8 @@ const groq = new Groq({
 	baseURL: 'https://api.groq.com',
 });
 
+
+
 export async function POST(req: NextRequest) {
 	try {
 		console.log('Request received');
@@ -28,23 +30,20 @@ Schema:
 {
   "action":     "<one of: open_app | open_website | run_command | other>",
   "target":     "<application name, URL or full shell command>",
-  "parameters": { /* any extra args, e.g. browser, working_directory, args array */ },
   "steps":      [
-    "<human‑readable instruction 1>",
-    "<human‑readable instruction 2>",
-    …
+    "<single human‑readable instruction>"
   ]
 }
 
 – **action** tells our orchestrator which module to invoke  
 – **target** names the app, URL, or the exact shell command to run  
-– **parameters** holds optional flags or arguments (e.g., "browser":"chrome", "args":["/usr/local/bin"])  
-– **steps** is a fall‑back human‑readable checklist for debugging or manual execution  
+– **steps** gives me one step at a time, in human language, to be executed by the orchestrator. 
 
 > **Important:**  
 > 1. Output **only** the JSON—no explanatory text, no trailing commas, no comments.  
-> 2. If the request cannot be mapped to open_app, open_website, or run_command, use "action":"other", echo the raw user request into "target", and leave "parameters":{}.  
-> 3. Always include at least one "steps" entry, even for "other".  
+> 2. If the request cannot be mapped to open_app, open_website, or run_command, use "action":"other", echo the raw user request into "target".  
+> 3. Always include at least one "steps" entry, even for "other".
+> 4. One step at a time, please.  
 `
 		};
 

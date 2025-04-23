@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat } from '@/hooks/useChat';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import LeftPanel from '@/components/LeftPanel';
 import RightPanel from '@/components/RightPanel';
@@ -23,101 +23,9 @@ export default function JarvisAssistant() {
 	const [caption, setCaption] = useState<string | null>(null);
 	const [isFinal, setIsFinal] = useState(false);
 
-	// useEffect(() => {
-	// 	// whenever rawMessages changes…
-	// 	const last = rawMessages[rawMessages.length - 1];
-	// 	if (last?.role !== 'assistant') return;
-	   
-	// 	// coerce content to a single string
-	// 	const text = typeof last.content === 'string'
-	// 	  ? last.content
-	// 	  : last.content
-	// 		 .filter(c => c.type === 'text')
-	// 		 .map(c => (c as any).text)
-	// 		 .join(' ');
-	   
-	// 	// look for **your-command-here**
-	// 	const cmd = text.match(/\*\*(.*?)\*\*/)?.[1]?.trim();
-	// 	if (!cmd) return;
-	   
-	// 	// fire it off
-	// 	fetch('/api/execute-cmd', {
-	// 	  method: 'POST',
-	// 	  headers: { 'Content-Type': 'application/json' },
-	// 	  body: JSON.stringify({ command: cmd }),
-	// 	})
-	// 	  .then(r => r.json())
-	// 	  .then(d => {
-	// 	    if (d.success) console.log('CMD ran:', cmd);
-	// 	    else console.error('CMD failed:', d.error);
-	// 	  })
-	// 	  .catch(console.error);
-	//    }, [rawMessages]);
-	   
-
-
-	// Function to handle the caption input change	
-	// API Call Functions
 	
 	
-	const openCalculator = async () => {
-		try {
-			console.log('Opening calculator...');
-			const response = await fetch('/api/terminator/open-calculator');
-			const data = await response.json();
-			if (data.success) {
-				alert('Calculator opened successfully!');
-			} else {
-				alert(`Failed to open calculator: ${data.error}`);
-			}
-		} catch (error) {
-			console.error('Error opening calculator:', error);
-		}
-	};
 
-	const performCalculation = async () => {
-		try {
-			const response = await fetch('/api/terminator/calculate', {
-				method: 'POST',
-			});
-			const data = await response.json();
-			if (data.success) {
-				alert(`Calculation result: ${data.result}`);
-			} else {
-				alert(`Failed to perform calculation: ${data.error}`);
-			}
-		} catch (error) {
-			console.error('Error performing calculation:', error);
-		}
-	};
-
-	const getDisplayText = async () => {
-		try {
-			const response = await fetch('/api/terminator/get-display');
-			const data = await response.json();
-			if (data.success) {
-				alert(`Calculator display text: ${data.displayText}`);
-			} else {
-				alert(`Failed to get display text: ${data.error}`);
-			}
-		} catch (error) {
-			console.error('Error getting display text:', error);
-		}
-	};
-
-	const closeCalculator = async () => {
-		try {
-			const response = await fetch('/api/terminator/close-calculator');
-			const data = await response.json();
-			if (data.success) {
-				alert('Calculator closed successfully!');
-			} else {
-				alert(`Failed to close calculator: ${data.error}`);
-			}
-		} catch (error) {
-			console.error('Error closing calculator:', error);
-		}
-	};
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files?.[0]) {
@@ -180,33 +88,7 @@ export default function JarvisAssistant() {
 				/>
 			</div>
 
-			{/* Buttons to Trigger API Calls */}
-			<div className="mt-4 space-y-2">
-				<button
-					onClick={openCalculator}
-					className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-				>
-					Open Calculator
-				</button>
-				<button
-					onClick={performCalculation}
-					className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-				>
-					Perform Calculation (1 + 2)
-				</button>
-				<button
-					onClick={getDisplayText}
-					className="p-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
-				>
-					Get Display Text
-				</button>
-				<button
-					onClick={closeCalculator}
-					className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-				>
-					Close Calculator
-				</button>
-			</div>
+		
 		</div>
 	);
 }

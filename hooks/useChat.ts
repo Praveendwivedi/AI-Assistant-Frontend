@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
+
 interface TextContent {
 	type: 'text';
 	text: string;
@@ -68,30 +69,57 @@ export function useChat() {
 		await append(userMessage);
 
 		// Call the custom API with the latest messages from the ref
+
 		try {
-			const response = await fetch('/api/chat', {
+			const re = await fetch('/api/ocr-data', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ messages: messagesRef.current }),
+			}).then(async (res) => {
+				const re = await res.json();
+				if (!res.ok) {
+					throw new Error('Failed to fetch OCR data from the API');
+				}
+				console.log('OCR data in useChat file:', re.ocrData.text);
+				
+				const ocrText = re.ocrData.text;
+
+				// Append OCR data as a user message
+				const ocrMessage: UserMessage = {
+					role: 'user',
+					content: [
+						{
+							type: 'text',
+							text: ocrText,
+						},
+					],
+				};
+				const updatedMsg = [...messagesRef.current, ocrMessage];
+				const response = await fetch('/api/chat', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ messages: updatedMsg }),
+				});
+
+				if (!response.ok) {
+					throw new Error('Failed to fetch response from the API');
+				}
+	
+				const data = await response.json();
+	
+				// Add the assistant's response to the chat
+				const assistantMessage: Message = {
+					role: 'assistant',
+					content: data.content,
+				};
+				append(assistantMessage);
+	
+				// Generate and play audio for the assistant's response
+				await generateAndPlayAudio(data.content);
 			});
-
-			if (!response.ok) {
-				throw new Error('Failed to fetch response from the API');
-			}
-
-			const data = await response.json();
-
-			// Add the assistant's response to the chat
-			const assistantMessage: Message = {
-				role: 'assistant',
-				content: data.content,
-			};
-			append(assistantMessage);
-
-			// Generate and play audio for the assistant's response
-			await generateAndPlayAudio(data.content);
 		} catch (error) {
 			console.error('Error fetching data:', error);
 		} finally {
