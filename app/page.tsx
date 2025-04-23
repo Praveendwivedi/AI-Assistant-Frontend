@@ -13,6 +13,7 @@ export default function JarvisAssistant() {
 		handleInputChange,
 		handleSubmit: originalHandleSubmit,
 		append,
+		lastAIResponse,
 	} = useChat();
 	const [image, setImage] = useState<File | null>(null);
 	const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -22,10 +23,6 @@ export default function JarvisAssistant() {
 	);
 	const [caption, setCaption] = useState<string | null>(null);
 	const [isFinal, setIsFinal] = useState(false);
-
-	
-	
-
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files?.[0]) {
@@ -85,10 +82,9 @@ export default function JarvisAssistant() {
 					setImagePreview={setImagePreview}
 					caption={caption}
 					isFinal={isFinal}
+					lastAIResponse={lastAIResponse}
 				/>
 			</div>
-
-		
 		</div>
 	);
 }

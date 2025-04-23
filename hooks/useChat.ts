@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 
-
 interface TextContent {
 	type: 'text';
 	text: string;
@@ -16,6 +15,11 @@ interface ImageUrlContent {
 type UserMessageContent = TextContent | ImageUrlContent;
 type SystemMessageContent = string;
 
+export type SystemMessageResponse = {
+	action: string;
+	target: string;
+	steps: string;
+};
 interface UserMessage {
 	role: 'user';
 	content: UserMessageContent[];
@@ -33,6 +37,8 @@ export function useChat() {
 	const [input, setInput] = useState<string>('');
 	const [responseAudio, setResponseAudio] = useState<string | null>(null); // For audio response
 	const messagesRef = useRef<Message[]>([]); // Ref to track the latest messages
+	const [lastAIResponse, setLastAIResponse] =
+		useState<SystemMessageResponse | null>(null); // For the last AI response
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInput(e.target.value);
@@ -82,7 +88,7 @@ export function useChat() {
 					throw new Error('Failed to fetch OCR data from the API');
 				}
 				console.log('OCR data in useChat file:', re.ocrData.text);
-				
+
 				const ocrText = re.ocrData.text;
 
 				// Append OCR data as a user message
@@ -107,18 +113,22 @@ export function useChat() {
 				if (!response.ok) {
 					throw new Error('Failed to fetch response from the API');
 				}
-	
-				const data = await response.json();
-	
+
+				const data = JSON.parse(
+					(await response.json()).content
+				) as SystemMessageResponse;
+
 				// Add the assistant's response to the chat
 				const assistantMessage: Message = {
 					role: 'assistant',
-					content: data.content,
+					content: data.steps,
 				};
 				append(assistantMessage);
-	
+				setLastAIResponse(data); // Update the last AI response
+				console.log('Assistant message:', data.steps, data);
+
 				// Generate and play audio for the assistant's response
-				await generateAndPlayAudio(data.content);
+				await generateAndPlayAudio(data.steps);
 			});
 		} catch (error) {
 			console.error('Error fetching data:', error);
@@ -204,5 +214,6 @@ export function useChat() {
 		handleInputChange,
 		handleSubmit,
 		append,
+		lastAIResponse,
 	};
 }

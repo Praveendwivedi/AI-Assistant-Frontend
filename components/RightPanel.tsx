@@ -1,7 +1,8 @@
 import ReactMarkdown from 'react-markdown';
-import { Message } from '@/hooks/useChat';
+import { Message, SystemMessageResponse } from '@/hooks/useChat';
 import { useEffect, useState } from 'react';
 import { handleResponse } from '@/hooks/useTerminator';
+import { set } from 'lodash';
 
 interface RightPanelProps {
 	rawMessages: Message[];
@@ -13,6 +14,7 @@ interface RightPanelProps {
 	setImagePreview: (value: string | null) => void;
 	caption: string | null;
 	isFinal: boolean;
+	lastAIResponse: SystemMessageResponse | null;
 }
 
 export default function RightPanel({
@@ -25,34 +27,16 @@ export default function RightPanel({
 	setImagePreview,
 	caption,
 	isFinal,
+	lastAIResponse,
 }: RightPanelProps) {
-
-	const [lastAiMessage, setLastAiMessage] = useState<String | null>(rawMessages[rawMessages.length - 1]?.role == 'assistant' ? rawMessages[rawMessages.length - 1].content as string : null );
-
-
-	
 	useEffect(() => {
-		const last = rawMessages[rawMessages.length - 1]?.content;
-		if (typeof last !== 'string') return;
-	   
+		if (!lastAIResponse) return;
 		async function process() {
-		  const re = await handleResponse(last as string);
+			const re = await handleResponse(lastAIResponse);
 		}
-	   
+
 		process();
-	   }, [rawMessages]);
-	   
-
-
-	useEffect(() => {
-		if (rawMessages.length > 0) {
-			const lastMessage = rawMessages[rawMessages.length - 1];
-			if (lastMessage.role === 'assistant') {
-				setLastAiMessage(lastMessage.content as string);
-			}
-		}
-		console.log("Raw Messages:", rawMessages);
-	},[rawMessages]);
+	}, [lastAIResponse]);
 
 	useEffect(() => {
 		if (caption) {
@@ -61,7 +45,11 @@ export default function RightPanel({
 			} as React.ChangeEvent<HTMLInputElement>);
 
 			// Automatically submit the form if isFinal is true
-			if (caption?.toLowerCase().includes('tool') && isFinal) {
+			if (
+				(caption?.toLowerCase().includes('buddy') ||
+					caption?.toLowerCase().includes('next')) &&
+				isFinal
+			) {
 				handleSubmit(new Event('submit') as unknown as React.FormEvent);
 			}
 		}
@@ -105,31 +93,11 @@ export default function RightPanel({
 												)}
 											</div>
 										))
-									) : typeof m.content === 'string' ? (
-										(() => {
-											try {
-												// Parse the JSON string
-												const parsedContent = JSON.parse(m.content);
-
-												// Check if 'steps' exists and is an array
-												if (parsedContent.steps && Array.isArray(parsedContent.steps)) {
-													return (
-														<ul className="list-disc pl-5">
-															{parsedContent.steps.map((step: string, idx: number) => (
-																<li key={idx}>{step}</li>
-															))}
-														</ul>
-													);
-												} else {
-													return <p>No steps available.</p>;
-												}
-											} catch (error) {
-												console.error('Failed to parse content:', error);
-												return <p>Invalid content format.</p>;
-											}
-										})()
+									) : m.role === 'assistant' &&
+									  m.content?.includes('```json') ? (
+										<ReactMarkdown>{m.content}</ReactMarkdown>
 									) : (
-										JSON.stringify(m.content)
+										<ReactMarkdown>{m.content}</ReactMarkdown>
 									)}
 								</div>
 							</div>

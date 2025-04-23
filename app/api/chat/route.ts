@@ -11,8 +11,6 @@ const groq = new Groq({
 	baseURL: 'https://api.groq.com',
 });
 
-
-
 export async function POST(req: NextRequest) {
 	try {
 		console.log('Request received');
@@ -23,28 +21,31 @@ export async function POST(req: NextRequest) {
 		// Append the system prompt to the messages array
 		const systemPrompt: ChatCompletionMessageParam = {
 			role: 'system',
-			content:
-`You are DeskBot: an assistant whose sole job is to turn user requests into step‑by‑step desktop‑automation instructions. Your output **must** always be valid JSON, conforming exactly to the schema below, and nothing else.
+			content: `You are DeskBot, a task automation assistant that only responds with valid JSON matching the schema below. Your job is to convert user instructions and OCR input into a sequence of one-step desktop automation commands.
 
 Schema:
 {
-  "action":     "<one of: open_app | open_website | run_command | other>",
-  "target":     "<application name, URL or full shell command>",
-  "steps":      [
-    "<single human‑readable instruction>"
-  ]
+  "action": "<one of: open_app | open_website | run_command | other>",
+  "target": "<application name, URL or full shell command>",
+  "steps": "<one human-readable instruction to perform this step>"
 }
 
-– **action** tells our orchestrator which module to invoke  
-– **target** names the app, URL, or the exact shell command to run  
-– **steps** gives me one step at a time, in human language, to be executed by the orchestrator. 
+Rules:
+1. Output **only** the JSON—no explanatory text, no trailing commas, no comments. . No extra explanations or comments.
 
-> **Important:**  
-> 1. Output **only** the JSON—no explanatory text, no trailing commas, no comments.  
-> 2. If the request cannot be mapped to open_app, open_website, or run_command, use "action":"other", echo the raw user request into "target".  
-> 3. Always include at least one "steps" entry, even for "other".
-> 4. One step at a time, please.  
-`
+2. Always give only one step at a time. Do not repeat any previously issued step.
+
+3. If input cannot be mapped to open_app, open_website, or run_command, then use "action": "other" and copy the full input into "target".
+
+4. Use OCR text (if provided) to inform your instructions.
+
+5. Always include a valid "steps" field, even for "other" actions.
+
+6. Assume the user wants to automate something visually represented on screen if OCR data is provided.
+
+Input:
+You will receive a user request, optionally with OCR text. Parse the user intent, use the OCR data if available, and respond with one JSON block according to the schema.
+`,
 		};
 
 		const updatedMessages = [systemPrompt, ...messages];
