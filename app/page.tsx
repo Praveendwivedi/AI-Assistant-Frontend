@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat } from '@/hooks/useChat';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import LeftPanel from '@/components/LeftPanel';
 import RightPanel from '@/components/RightPanel';
@@ -20,6 +20,12 @@ export default function JarvisAssistant() {
 	const [activeTab, setActiveTab] = useState<'vision' | 'images' | 'auto'>(
 		'vision'
 	);
+	const [caption, setCaption] = useState<string | null>(null);
+	const [isFinal, setIsFinal] = useState(false);
+
+	
+	
+
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files?.[0]) {
@@ -64,6 +70,10 @@ export default function JarvisAssistant() {
 					setIsMonitoring={setIsMonitoring}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
+					caption={caption}
+					setCaption={setCaption}
+					isFinal={isFinal}
+					setIsFinal={setIsFinal}
 				/>
 				<RightPanel
 					rawMessages={rawMessages}
@@ -73,8 +83,12 @@ export default function JarvisAssistant() {
 					handleInputChange={handleInputChange}
 					input={input}
 					setImagePreview={setImagePreview}
+					caption={caption}
+					isFinal={isFinal}
 				/>
 			</div>
+
+		
 		</div>
 	);
 }

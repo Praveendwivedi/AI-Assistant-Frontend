@@ -11,6 +11,8 @@ const groq = new Groq({
 	baseURL: 'https://api.groq.com',
 });
 
+
+
 export async function POST(req: NextRequest) {
 	try {
 		console.log('Request received');
@@ -18,10 +20,40 @@ export async function POST(req: NextRequest) {
 			messages: ChatCompletionMessageParam[];
 		};
 
-		console.log('messsages:', messages);
+		// Append the system prompt to the messages array
+		const systemPrompt: ChatCompletionMessageParam = {
+			role: 'system',
+			content:
+`You are DeskBot: an assistant whose sole job is to turn user requests into step‑by‑step desktop‑automation instructions. Your output **must** always be valid JSON, conforming exactly to the schema below, and nothing else.
+
+Schema:
+{
+  "action":     "<one of: open_app | open_website | run_command | other>",
+  "target":     "<application name, URL or full shell command>",
+  "steps":      [
+    "<single human‑readable instruction>"
+  ]
+}
+
+– **action** tells our orchestrator which module to invoke  
+– **target** names the app, URL, or the exact shell command to run  
+– **steps** gives me one step at a time, in human language, to be executed by the orchestrator. 
+
+> **Important:**  
+> 1. Output **only** the JSON—no explanatory text, no trailing commas, no comments.  
+> 2. If the request cannot be mapped to open_app, open_website, or run_command, use "action":"other", echo the raw user request into "target".  
+> 3. Always include at least one "steps" entry, even for "other".
+> 4. One step at a time, please.  
+`
+		};
+
+		const updatedMessages = [systemPrompt, ...messages];
+
+		console.log('Updated messages:', updatedMessages);
+
 		const res = await groq.chat.completions.create({
 			model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-			messages,
+			messages: updatedMessages,
 			temperature: 1,
 			max_completion_tokens: 1024,
 			top_p: 1,
