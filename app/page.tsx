@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import LeftPanel from '@/components/LeftPanel';
 import RightPanel from '@/components/RightPanel';
 
-export default function JarvisAssistant() {
+export default function AIAssistant() {
 	const {
 		messages: rawMessages,
 		input,
@@ -14,13 +14,15 @@ export default function JarvisAssistant() {
 		handleSubmit: originalHandleSubmit,
 		append,
 		lastAIResponse,
+		setUseOCR,
+		setUseScreenshot,
 	} = useChat();
 	const [image, setImage] = useState<File | null>(null);
 	const [imagePreview, setImagePreview] = useState<string | null>(null);
 	const [isMonitoring, setIsMonitoring] = useState(false);
-	const [activeTab, setActiveTab] = useState<'vision' | 'images' | 'auto'>(
-		'vision'
-	);
+	const [activeTab, setActiveTab] = useState<
+		'screenshot' | 'ocr' | 'screenshot+ocr' | 'none'
+	>('ocr');
 	const [caption, setCaption] = useState<string | null>(null);
 	const [isFinal, setIsFinal] = useState(false);
 
@@ -58,6 +60,24 @@ export default function JarvisAssistant() {
 		}
 	};
 
+	useEffect(() => {
+		if (activeTab === 'screenshot') {
+			setUseScreenshot(true);
+			setUseOCR(false);
+		}
+		if (activeTab === 'ocr') {
+			setUseScreenshot(false);
+			setUseOCR(true);
+		}
+		if (activeTab === 'screenshot+ocr') {
+			setUseScreenshot(true);
+			setUseOCR(true);
+		}
+		if (activeTab === 'none') {
+			setUseScreenshot(false);
+			setUseOCR(false);
+		}
+	}, [activeTab, setUseScreenshot, setUseOCR]);
 	return (
 		<div className="jarvis-container p-4 min-h-screen font-poppins bg-gray-50">
 			<Header />

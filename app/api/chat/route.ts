@@ -33,7 +33,7 @@ Schema:
 Rules:
 1. Output **only** the JSON—no explanatory text, no trailing commas, no comments. . No extra explanations or comments.
 
-2. Always give only one step at a time. Do not repeat any previously issued step.
+2. Always give only one step at a time. 
 
 3. If input cannot be mapped to open_app, open_website, or run_command, then use "action": "other" and copy the full input into "target".
 
@@ -41,8 +41,8 @@ Rules:
 
 5. Always include a valid "steps" field, even for "other" actions.
 
-6. Assume the user wants to automate something visually represented on screen if OCR data is provided.
-
+Important:
+1. Do not repeat any previously issued step.
 Input:
 You will receive a user request, optionally with OCR text. Parse the user intent, use the OCR data if available, and respond with one JSON block according to the schema.
 `,

@@ -1,3 +1,4 @@
+import { set } from 'lodash';
 import { useState, useRef, useEffect } from 'react';
 
 interface TextContent {
@@ -39,7 +40,8 @@ export function useChat() {
 	const messagesRef = useRef<Message[]>([]); // Ref to track the latest messages
 	const [lastAIResponse, setLastAIResponse] =
 		useState<SystemMessageResponse | null>(null); // For the last AI response
-
+	const [useOCR, setUseOCR] = useState<boolean>(false); // For OCR usage
+	const [useScreenshot, setUseScreenshot] = useState<boolean>(false); // For screenshot usage
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInput(e.target.value);
 	};
@@ -73,41 +75,102 @@ export function useChat() {
 			],
 		};
 		await append(userMessage);
+		/////////////////////////////////////////////////////
+		if (useScreenshot) {
+			const ss_response = await fetch('/api/screen-image', {
+				method: 'GET',
+			});
+			if (!ss_response.ok) {
+				throw new Error('Failed to fetch screenshot');
+			}
 
-		// Call the custom API with the latest messages from the ref
+			// Convert the ss_response to a Blob
+			const blob = await ss_response.blob();
 
-		try {
-			const re = await fetch('/api/ocr-data', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}).then(async (res) => {
-				const re = await res.json();
-				if (!res.ok) {
-					throw new Error('Failed to fetch OCR data from the API');
-				}
-				console.log('OCR data in useChat file:', re.ocrData.text);
+			// Read the Blob as a Base64 string
+			const reader = new FileReader();
+			reader.onloadend = async () => {
+				const base64data = reader.result as string;
 
-				const ocrText = re.ocrData.text;
-
-				// Append OCR data as a user message
-				const ocrMessage: UserMessage = {
+				// Call the append method to add the screenshot to the chat
+				await append({
 					role: 'user',
 					content: [
 						{
-							type: 'text',
-							text: ocrText,
+							type: 'image_url',
+							image_url: {
+								url: base64data,
+							},
 						},
 					],
-				};
-				const updatedMsg = [...messagesRef.current, ocrMessage];
+				});
+			};
+			await reader.readAsDataURL(blob);
+		}
+		///////////////////////////////////////////////////////
+		// Call the custom API with the latest messages from the ref
+		try {
+			if (useOCR) {
+				const re = await fetch('/api/ocr-data', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}).then(async (res) => {
+					const re = await res.json();
+					if (!res.ok) {
+						throw new Error('Failed to fetch OCR data from the API');
+					}
+					console.log('OCR data in useChat file:', re.ocrData.text);
+
+					const ocrText = re.ocrData.text;
+
+					// Append OCR data as a user message
+					const ocrMessage: UserMessage = {
+						role: 'user',
+						content: [
+							{
+								type: 'text',
+								text: `this is current screen occr: ${ocrText}`,
+							},
+						],
+					};
+					const updatedMsg = [...messagesRef.current, ocrMessage];
+					const response = await fetch('/api/chat', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ messages: updatedMsg }),
+					});
+
+					if (!response.ok) {
+						throw new Error('Failed to fetch response from the API');
+					}
+
+					const data = JSON.parse(
+						(await response.json()).content
+					) as SystemMessageResponse;
+
+					// Add the assistant's response to the chat
+					const assistantMessage: Message = {
+						role: 'assistant',
+						content: data.steps,
+					};
+					append(assistantMessage);
+					setLastAIResponse(data); // Update the last AI response
+					console.log('Assistant message:', data.steps, data);
+
+					// Generate and play audio for the assistant's response
+					await generateAndPlayAudio(data.steps);
+				});
+			} else {
 				const response = await fetch('/api/chat', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({ messages: updatedMsg }),
+					body: JSON.stringify({ messages: messagesRef.current }),
 				});
 
 				if (!response.ok) {
@@ -123,14 +186,15 @@ export function useChat() {
 					role: 'assistant',
 					content: data.steps,
 				};
-				append(assistantMessage);
+				await append(assistantMessage);
 				setLastAIResponse(data); // Update the last AI response
 				console.log('Assistant message:', data.steps, data);
 
 				// Generate and play audio for the assistant's response
 				await generateAndPlayAudio(data.steps);
-			});
+			}
 		} catch (error) {
+			await generateAndPlayAudio('Terminator is not running in your system.');
 			console.error('Error fetching data:', error);
 		} finally {
 			setInput('');
@@ -215,5 +279,7 @@ export function useChat() {
 		handleSubmit,
 		append,
 		lastAIResponse,
+		setUseOCR,
+		setUseScreenshot,
 	};
 }

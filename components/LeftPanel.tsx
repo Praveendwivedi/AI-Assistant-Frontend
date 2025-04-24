@@ -6,14 +6,13 @@ import {
 	LiveTranscriptionEvents,
 	createClient,
 } from '@deepgram/sdk';
-import Recording from './recording.svg';
-
+import MicrophoneButton from './MicrophoneIcon';
 
 interface LeftPanelProps {
 	isMonitoring: boolean;
 	setIsMonitoring: (value: boolean) => void;
-	activeTab: 'vision' | 'images' | 'auto';
-	setActiveTab: (tab: 'vision' | 'images' | 'auto') => void;
+	activeTab: 'screenshot' | 'ocr' | 'screenshot+ocr' | 'none';
+	setActiveTab: (tab: 'screenshot' | 'ocr' | 'screenshot+ocr' | 'none') => void;
 	caption: string | null;
 	setCaption: (caption: string) => void;
 	isFinal: boolean;
@@ -89,7 +88,7 @@ export default function LeftPanel({
 			const deepgram = createClient(apiKey.key);
 			setDeepgram(deepgram);
 			const connection = deepgram.listen.live({
-				model: 'nova',
+				model: 'nova-3',
 				interim_results: true,
 				smart_format: true,
 				utterance_end_ms: 1000,
@@ -164,89 +163,44 @@ export default function LeftPanel({
 			{/* Toggle Buttons */}
 			<div className="bg-white p-2 rounded-xl border border-gray-200 shadow-sm">
 				<div className="grid grid-cols-3 gap-1 bg-gray-100 p-1 rounded-lg">
-					{(['vision', 'images', 'auto'] as const).map((tab) => (
-						<button
-							key={tab}
-							onClick={() => setActiveTab(tab)}
-							className={`py-2 text-sm rounded-lg transition-all ${
-								activeTab === tab
-									? 'bg-blue-500 text-white shadow-md'
-									: 'bg-white text-gray-700 hover:bg-gray-50'
-							}`}
-						>
-							{tab === 'vision'
-								? 'Vision'
-								: tab === 'images'
-								? 'Images'
-								: 'Auto'}
-						</button>
-					))}
+					{(['screenshot', 'ocr', 'screenshot+ocr', 'none'] as const).map(
+						(tab) => (
+							<button
+								key={tab}
+								onClick={() => setActiveTab(tab)}
+								className={`py-2 text-sm rounded-lg transition-all ${
+									activeTab === tab
+										? 'bg-blue-500 text-white shadow-md'
+										: 'bg-white text-gray-700 hover:bg-gray-50'
+								}`}
+							>
+								{tab === 'screenshot'
+									? 'Screenshot'
+									: tab === 'ocr'
+									? 'OCR'
+									: tab === 'screenshot+ocr'
+									? 'Screenshot + OCR'
+									: 'None'}
+							</button>
+						)
+					)}
 				</div>
 			</div>
 
 			{/* Microphone Section */}
 			<div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-4">
 				<div className="flex flex-col items-center">
-					{!!userMedia && !!microphone && micOpen ? (
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="168"
-							height="129"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							className="text-red-500"
-						>
-							<path d="M12 1v10"></path>
-							<path d="M5 10a7 7 0 0 0 14 0"></path>
-							<path d="M12 19v4"></path>
-							<path d="M8 23h8"></path>
-						</svg>
-					) : (
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="168"
-							height="129"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							className="text-gray-500"
-						>
-							<circle cx="12" cy="12" r="10"></circle>
-							<line x1="12" y1="8" x2="12" y2="12"></line>
-							<line x1="12" y1="16" x2="12" y2="16"></line>
-						</svg>
-					)}
-
-					<button className="w-24 h-24" onClick={() => toggleMicrophone()}>
-						<Recording
-							width="96"
-							height="96"
-							className={
-								`cursor-pointer` +
-								(!!userMedia && !!microphone && micOpen
-									? ' fill-red-400 drop-shadow-glowRed'
-									: ' fill-gray-600')
-							}
-						/>
-					</button>
+					<MicrophoneButton
+						isRecording={!!userMedia && !!microphone && micOpen}
+						onClick={toggleMicrophone}
+						isProcessing={isLoading || isLoadingKey}
+					/>
 					<div className="mt-4 text-center">
 						{caption && micOpen
 							? caption
 							: '** Realtime transcription by Deepgram **'}
 					</div>
 				</div>
-				{/* <GrowqAgentResponse
-					caption={caption}
-					isFinal={isFinal}
-					deepgram={deepgram}
-				/> */}
 			</div>
 		</div>
 	);
