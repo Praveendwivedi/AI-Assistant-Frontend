@@ -8,8 +8,6 @@
 
 ## 📌 Problem Statement
 
-**Problem Statement 3 – Weave AI magic with Groq**
-
 **Problem Statement 5 – Build the Future of AI Computer Control with Screenpipe - Terminator**
 
 ---
@@ -109,7 +107,7 @@ KRATOS
 ```bash
 # Clone the repo
 git clone https://github.com/Praveendwivedi/AI-Assistant-Frontend.git
-cd install-it.ai
+cd AI-Assistant-Frontend
 
 # Create a .env file and add required API keys
 
