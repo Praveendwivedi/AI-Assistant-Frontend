@@ -195,10 +195,10 @@ export default function LeftPanel({
 						onClick={toggleMicrophone}
 						isProcessing={isLoading || isLoadingKey}
 					/>
-					<div className="mt-4 text-center">
+					<div className="mt-4 text-center text-sm italic text-gray-500">
 						{caption && micOpen
 							? caption
-							: '** Realtime transcription by Deepgram **'}
+							: 'Conversations are transcribed live'}
 					</div>
 				</div>
 			</div>

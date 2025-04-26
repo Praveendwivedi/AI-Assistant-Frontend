@@ -58,8 +58,8 @@ export default function RightPanel({
 	return (
 		<div className="lg:col-span-2 space-y-4">
 			<div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm h-full">
-				<h2 className="text-xl font-semibold mb-4 text-gray-800">
-					How can I help you?
+				<h2 className="text-xl font-semibold mb-4 text-sky-600 italic">
+				What can I do for you today?
 				</h2>
 				<div className="jarvis-message-area bg-gray-50 p-4 mb-4 rounded-lg border border-gray-200">
 					{/* Render Messages */}
@@ -104,7 +104,7 @@ export default function RightPanel({
 						))
 					) : (
 						<div className="flex flex-col items-center justify-center py-12">
-							<p className="text-gray-500">No conversation yet</p>
+							<p className="text-gray-500">Ask me anything! Try: ‘How do I activate Vision?</p>
 						</div>
 					)}
 				</div>
