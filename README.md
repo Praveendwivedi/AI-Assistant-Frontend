@@ -59,7 +59,7 @@ KRATOS
 
 | **Category**       | **Technologies**                                                                 |
 |---------------------|---------------------------------------------------------------------------------|
-| **Frontend**        | Next.js, Tailwind CSS, Framer Motion, Radix UI                                 |
+| **Frontend**        | Next.js, Tailwind CSS, Framer Motion, Radix UI, Deepgram                                |
 | **Backend**         | Screenpipe Terminator, AI SDK, Groq SDK, Zod                                   |
 | **Database**        | Not applicable (future scope may include a DB layer)                          |
 | **Hosting**         | Vercel                                                                        |
@@ -82,6 +82,7 @@ KRATOS
 
 - **Demo Video Link:** [Add Link]
 - **Pitch Deck / PPT Link:** [Add Link]
+- **Deployed link: [https://payal-op-yin5.vercel.app/]**
 
 ---
 
@@ -124,6 +125,9 @@ Visit `http://localhost:3000` in your browser.
 
 ```bash
 # Open Screenpipe Terminator project directory
+git clone https://github.com/mediar-ai/terminator
+
+cd terminator
 
 # Setup for Windows (run only once)
 ./setup_windows.ps1
