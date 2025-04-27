@@ -28,6 +28,7 @@ export async function handleResponse(responseObject: any) {
 			'Control Panel': 'control.exe',
 			'Registry Editor': 'regedit.exe',
 			'Snipping Tool': 'snippingtool.exe',
+			'Microsoft Store': 'ms-windows-store:',
 		};
 
 		const appName = responseObject.target as keyof typeof apps_executables;
