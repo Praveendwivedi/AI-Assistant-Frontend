@@ -59,6 +59,42 @@ export function useChat() {
 		});
 	};
 
+	const fetchChatResponse = async (messages: Message[]) => {
+		try {
+			const response = await fetch('/api/chat', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ messages: messages.slice(-8) }),
+			});
+
+			if (!response.ok) {
+				throw new Error('Failed to fetch response from the API');
+			}
+
+			const jsonResponse = await response.json();
+			const cleanedContent = jsonResponse.content.replace(/\n/g, '');
+			const data = JSON.parse(cleanedContent) as SystemMessageResponse;
+
+			// Add the assistant's response to the chat
+			const assistantMessage: Message = {
+				role: 'assistant',
+				content: data.steps,
+			};
+			append(assistantMessage);
+			setLastAIResponse(data); // Update the last AI response
+			console.log('Assistant message:', data.steps, data);
+
+			// Generate and play audio for the assistant's response
+			await generateAndPlayAudio(data.steps);
+		} catch (error) {
+			await generateAndPlayAudio('Terminator is not running in your system.');
+			console.error('Error fetching data:', error);
+		} finally {
+			setInput('');
+		}
+	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
@@ -136,62 +172,11 @@ export function useChat() {
 						],
 					};
 					const updatedMsg = [...messagesRef.current, ocrMessage];
-					const response = await fetch('/api/chat', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify({ messages: updatedMsg }),
-					});
-
-					if (!response.ok) {
-						throw new Error('Failed to fetch response from the API');
-					}
-
-					const data = JSON.parse(
-						(await response.json()).content
-					) as SystemMessageResponse;
-
-					// Add the assistant's response to the chat
-					const assistantMessage: Message = {
-						role: 'assistant',
-						content: data.steps,
-					};
-					append(assistantMessage);
-					setLastAIResponse(data); // Update the last AI response
-					console.log('Assistant message:', data.steps, data);
-
-					// Generate and play audio for the assistant's response
-					await generateAndPlayAudio(data.steps);
+					fetchChatResponse(updatedMsg);
 				});
 			} else {
-				const response = await fetch('/api/chat', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ messages: messagesRef.current }),
-				});
-
-				if (!response.ok) {
-					throw new Error('Failed to fetch response from the API');
-				}
-
-				const data = JSON.parse(
-					(await response.json()).content
-				) as SystemMessageResponse;
-
-				// Add the assistant's response to the chat
-				const assistantMessage: Message = {
-					role: 'assistant',
-					content: data.steps,
-				};
-				await append(assistantMessage);
-				setLastAIResponse(data); // Update the last AI response
-				console.log('Assistant message:', data.steps, data);
-
-				// Generate and play audio for the assistant's response
-				await generateAndPlayAudio(data.steps);
+				// Call the fetchChatResponse function with the latest messages from the ref
+				fetchChatResponse(messagesRef.current);
 			}
 		} catch (error) {
 			await generateAndPlayAudio('Terminator is not running in your system.');

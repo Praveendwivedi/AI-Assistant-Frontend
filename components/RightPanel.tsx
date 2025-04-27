@@ -42,17 +42,15 @@ export default function RightPanel({
 			handleInputChange({
 				target: { value: caption },
 			} as React.ChangeEvent<HTMLInputElement>);
-
-			// Automatically submit the form if isFinal is true
-			if (
-				(caption?.toLowerCase().includes('buddy') ||
-					caption?.toLowerCase().includes('next')) &&
-				isFinal
-			) {
-				handleSubmit(new Event('submit') as unknown as React.FormEvent);
-			}
 		}
-	}, [caption, isFinal]);
+	}, [caption]);
+
+	useEffect(() => {
+		// Automatically submit the form if isFinal is true
+		if (isFinal) {
+			handleSubmit(new Event('submit') as unknown as React.FormEvent);
+		}
+	}, [isFinal]);
 
 	return (
 		<div className="lg:col-span-2 space-y-4">
