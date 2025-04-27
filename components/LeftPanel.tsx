@@ -126,69 +126,33 @@ export default function LeftPanel({
 
 	return (
 		<div className="space-y-4">
-			{/* Welcome Section */}
-			<div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-				<div className="flex justify-between items-center">
-					<h2 className="text-lg font-medium text-gray-800">Welcome back!</h2>
-					<span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-						Live
-					</span>
-				</div>
-				<div className="mt-4 space-y-3">
-					<div className="flex items-center gap-2">
-						<div className="w-2 h-2 rounded-full bg-red-500"></div>
-						<span className="text-sm font-medium text-gray-700">
-							Vision: UI ✗
-						</span>
-					</div>
-					<div className="flex items-center gap-2">
-						<div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-						<span className="text-sm font-medium text-gray-700">
-							Vision: Analyzing...
-						</span>
-					</div>
-					<div className="flex items-center gap-2">
-						<div
-							className={`w-2 h-2 rounded-full ${
-								isMonitoring ? 'bg-green-500' : 'bg-gray-400'
-							}`}
-						></div>
-						<span className="text-sm font-medium text-gray-700">
-							Status: {isMonitoring ? 'Active' : 'Inactive'}
-						</span>
-					</div>
-				</div>
-			</div>
-
 			{/* Toggle Buttons */}
-			<div className="bg-white p-2 rounded-xl border border-gray-200 shadow-sm">
-				<div className="grid grid-cols-3 gap-1 bg-gray-100 p-1 rounded-lg">
-					{(['screenshot', 'ocr', 'screenshot+ocr', 'none'] as const).map(
-						(tab) => (
-							<button
-								key={tab}
-								onClick={() => setActiveTab(tab)}
-								className={`py-2 text-sm rounded-lg transition-all ${
-									activeTab === tab
-										? 'bg-blue-500 text-white shadow-md'
-										: 'bg-white text-gray-700 hover:bg-gray-50'
-								}`}
-							>
-								{tab === 'screenshot'
-									? 'Screenshot'
-									: tab === 'ocr'
-									? 'OCR'
-									: tab === 'screenshot+ocr'
-									? 'Screenshot + OCR'
-									: 'None'}
-							</button>
-						)
-					)}
+			<div className="bg-white p-4 rounded-2xl border-2 border-blue-300 shadow-sm">
+				<div className="grid grid-cols-1 gap-3 bg-gray-100 p-3 rounded-2xl">
+					{(['screenshot', 'ocr', 'screenshot+ocr', 'none'] as const).map((tab) => (
+						<button
+							key={tab}
+							onClick={() => setActiveTab(tab)}
+							className={`py-4 text-lg font-medium rounded-full transition-all duration-300 transform ${
+								activeTab === tab
+									? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg scale-105'
+									: 'bg-gray-50 text-gray-700 hover:bg-gray-200 hover:shadow-md'
+							}`}
+						>
+							{tab === 'screenshot'
+    ? '📸 Screenshot'
+    : tab === 'ocr'
+    ? '🔠 OCR'
+    : tab === 'screenshot+ocr'
+    ? '📸+🔠 Screenshot + OCR'
+    : '⚙️ Mode: None'}
+						</button>
+					))}
 				</div>
 			</div>
 
 			{/* Microphone Section */}
-			<div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-4">
+			<div className="bg-white p-4 rounded-2xl border-2 border-blue-300 shadow-sm space-y-4">
 				<div className="flex flex-col items-center">
 					<MicrophoneButton
 						isRecording={!!userMedia && !!microphone && micOpen}
