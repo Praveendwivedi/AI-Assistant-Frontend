@@ -16,11 +16,37 @@
 
 Installing applications and executing system-level actions often require manual effort, technical know-how, and time. For non-technical users or busy professionals, this process can be inefficient, confusing, or error-prone.
 
-**Real-world Use Case:**
+# 🚀 Real-world Use Cases
 
-> "Install VS Code and set it up for Python development."
->
+### 1. 🛠️ VS Code Setup for Python Development
+**User Request:**  
+> "Install VS Code and set it up for Python development."  
 > "Run the server and check logs."
+
+**Workflow:**  
+- 🔹 Install **Visual Studio Code** automatically.  
+- 🔹 Set up Python environment: install Python extension + basic config.  
+- 🔹 Launch the project server directly from VS Code.  
+- 🔹 Open an integrated terminal to stream server logs in real-time.
+
+**Outcome:**  
+✅ Ready-to-code Python environment + live server monitoring in minutes!
+
+---
+
+### 2. 💬 WhatsApp Installation on Windows
+**User Request:**  
+> "Install WhatsApp on my Windows PC."
+
+**Workflow:**  
+- 🔹 Fetch the official **WhatsApp Desktop** installer for Windows.  
+- 🔹 Perform a silent installation (no user intervention needed).  
+- 🔹 Auto-launch WhatsApp after installation for easy setup.
+
+**Outcome:**  
+✅ WhatsApp installed and ready for messaging without touching the browser!
+
+---
 
 **Who it serves:** Everyday users, developers, and IT professionals looking for a smarter, easier way to interact with their systems.
 
