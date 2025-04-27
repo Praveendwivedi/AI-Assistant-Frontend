@@ -1,8 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import { Message, SystemMessageResponse } from '@/hooks/useChat';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { handleResponse } from '@/hooks/useTerminator';
-import { set } from 'lodash';
 
 interface RightPanelProps {
 	rawMessages: Message[];
@@ -57,9 +56,10 @@ export default function RightPanel({
 
 	return (
 		<div className="lg:col-span-2 space-y-4">
-			<div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm h-full">
-				<h2 className="text-xl font-semibold mb-4 text-gray-800">
-					How can I help you?
+			{/* Outer Box */}
+			<div className="bg-white p-6 rounded-xl border-2 border-blue-300 shadow-sm h-full">
+				<h2 className="text-xl font-semibold mb-4 text-sky-600 italic">
+					What can I do for you today?
 				</h2>
 				<div className="jarvis-message-area bg-gray-50 p-4 mb-4 rounded-lg border border-gray-200">
 					{/* Render Messages */}
@@ -104,7 +104,7 @@ export default function RightPanel({
 						))
 					) : (
 						<div className="flex flex-col items-center justify-center py-12">
-							<p className="text-gray-500">No conversation yet</p>
+							<p className="text-gray-500">Ask me anything! Try: ‘How do I activate Vision?’</p>
 						</div>
 					)}
 				</div>
@@ -152,8 +152,9 @@ export default function RightPanel({
 							</svg>
 						</label>
 
+						{/* Chat Input Box */}
 						<input
-							className="flex-1 p-2 border border-gray-300 rounded-lg bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+							className="flex-1 p-2 border-2 border-blue-300 rounded-lg bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
 							value={input}
 							placeholder="Type your message..."
 							onChange={handleInputChange}

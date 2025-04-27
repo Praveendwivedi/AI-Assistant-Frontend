@@ -52,52 +52,31 @@ KRATOS
 
 - Identified the common frustration of manual installations and command-line complexities
 - Leveraged AI to interpret and act on user commands
-- Faced challenges with command validation, secure execution, and integration with Terminator
-- Breakthrough: Successfully executed multi-step commands hands-free using GROQ + Terminator
+- Faced challenges with command validation, secure execution, and integration with **Screenpipe Terminator**
+- Breakthrough: Successfully executed multi-step commands hands-free using **GROQ + Screenpipe Terminator**
 
 ---
 
 ## 🛠️ Tech Stack
 
-### 💻 Frontend
-
-- Next.js
-- Tailwind CSS
-- Framer Motion
-- Radix UI
-
-### ⚙️ Backend
-
-- Terminator
-- AI SDK
-- Groq SDK
-- Zod
-
-
-### 💾 Database
-
-- Not applicable (currently no DB layer used, future scope may include this)
-
-### 📊 Hosting
-
-- Vercel
-
-### ☑️ Sponsor Technologies Used:
-
-- [✅] **Groq:** Used to parse user input into structured task flows
-- [✅] **Terminator:** Used to execute system-level actions securely
+| **Category**       | **Technologies**                                                                 |
+|---------------------|---------------------------------------------------------------------------------|
+| **Frontend**        | Next.js, Tailwind CSS, Framer Motion, Radix UI                                 |
+| **Backend**         | Screenpipe Terminator, AI SDK, Groq SDK, Zod                                   |
+| **Database**        | Not applicable (future scope may include a DB layer)                          |
+| **Hosting**         | Vercel                                                                        |
+| **Sponsor Tech**    | **Groq** (parsing user input into structured task flows), **Screenpipe Terminator** (secure system-level actions) |
 
 ---
 
 ## ✨ Key Features
 
-- ✅ AI-powered task parsing from natural language
-- ✅ Automated system actions (open apps, URLs, terminals)
-- ✅ Real-time step tracking
-- ✅ GROQ-based structured command processing
-- ✅ Secure execution using Terminator
-- ✅ Modular, scalable design for future extensions
-- ✅ Seamless integration with Next.js UI
+- 🎤 **Voice Input**: Interact with the assistant using voice commands.
+- 🖼️ **Image Input**: Upload images for OCR-based task automation.
+- 📝 **Voice Transcription**: Real-time transcription of conversations.
+- ⚡ **Real-Time Assistance**: Get instant responses and step-by-step guidance.
+- 🔒 **Secure Execution**: Perform system-level actions safely using **Screenpipe Terminator**.
+- 🧠 **AI-Powered Parsing**: Understands natural language and converts it into actionable tasks.
 
 ---
 
@@ -111,8 +90,8 @@ KRATOS
 ## ✅ Tasks & Bonus Checklist
 
 - [✅] **All members completed the mandatory task - Followed social channels and filled the form**
-- [✅] **Bonus Task 1 - Shared badges and filled the form **
-- [✅] **Bonus Task 2 - Signed up for Sprint.dev and filled the form **
+- [✅] **Bonus Task 1 - Shared badges and filled the form**
+- [✅] **Bonus Task 2 - Signed up for Sprint.dev and filled the form**
 
 ---
 
@@ -143,10 +122,10 @@ npm run dev
 
 Visit `http://localhost:3000` in your browser.
 
-#### 🔹 Backend (Terminator Server)
+#### 🔹 Backend (Screenpipe Terminator Server)
 
 ```bash
-# Open Terminator project directory
+# Open Screenpipe Terminator project directory
 
 # Setup for Windows (run only once)
 ./setup_windows.ps1
@@ -172,7 +151,7 @@ Ensure proper terminal/command-line permissions while executing.
 ## 📌 Resources / Credits
 
 - **GROQ:** For AI command structuring
-- **Terminator:** For system-level automation
+- **Screenpipe Terminator:** For system-level automation
 - **Namespace Community:** Mentorship and event support
 
 ---
