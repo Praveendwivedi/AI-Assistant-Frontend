@@ -106,8 +106,8 @@ KRATOS
 
 ## 📟️ Demo & Deliverables
 
-- **Demo Video Link:** [Add Link]
-- **Pitch Deck / PPT Link:** [Add Link]
+- **Demo Video Link:** [https://www.youtube.com/watch?v=yAwYDrevTdU]
+- **Pitch Deck / PPT Link:** [https://www.canva.com/design/DAGlz8sObHQ/aBVjL3QPftWFahehU8xdmg/edit?utm_content=DAGlz8sObHQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton]
 - **Deployed link: [https://ai--iota.vercel.app/]**
 
 ---
