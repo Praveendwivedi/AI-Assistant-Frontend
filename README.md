@@ -108,7 +108,7 @@ KRATOS
 
 - **Demo Video Link:** [Add Link]
 - **Pitch Deck / PPT Link:** [Add Link]
-- **Deployed link: [https://payal-op-yin5.vercel.app/]**
+- **Deployed link: [https://ai--iota.vercel.app/]**
 
 ---
 
