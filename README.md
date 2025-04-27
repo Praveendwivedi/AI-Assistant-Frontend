@@ -8,8 +8,6 @@
 
 ## 📌 Problem Statement
 
-**Problem Statement 3 – Weave AI magic with Groq**
-
 **Problem Statement 5 – Build the Future of AI Computer Control with Screenpipe - Terminator**
 
 ---
@@ -18,11 +16,37 @@
 
 Installing applications and executing system-level actions often require manual effort, technical know-how, and time. For non-technical users or busy professionals, this process can be inefficient, confusing, or error-prone.
 
-**Real-world Use Case:**
+# 🚀 Real-world Use Cases
 
-> "Install VS Code and set it up for Python development."
->
+### 1. 🛠️ VS Code Setup for Python Development
+**User Request:**  
+> "Install VS Code and set it up for Python development."  
 > "Run the server and check logs."
+
+**Workflow:**  
+- 🔹 Install **Visual Studio Code** automatically.  
+- 🔹 Set up Python environment: install Python extension + basic config.  
+- 🔹 Launch the project server directly from VS Code.  
+- 🔹 Open an integrated terminal to stream server logs in real-time.
+
+**Outcome:**  
+✅ Ready-to-code Python environment + live server monitoring in minutes!
+
+---
+
+### 2. 💬 WhatsApp Installation on Windows
+**User Request:**  
+> "Install WhatsApp on my Windows PC."
+
+**Workflow:**  
+- 🔹 Fetch the official **WhatsApp Desktop** installer for Windows.  
+- 🔹 Perform a silent installation (no user intervention needed).  
+- 🔹 Auto-launch WhatsApp after installation for easy setup.
+
+**Outcome:**  
+✅ WhatsApp installed and ready for messaging without touching the browser!
+
+---
 
 **Who it serves:** Everyday users, developers, and IT professionals looking for a smarter, easier way to interact with their systems.
 
@@ -61,7 +85,7 @@ KRATOS
 
 | **Category**       | **Technologies**                                                                 |
 |---------------------|---------------------------------------------------------------------------------|
-| **Frontend**        | Next.js, Tailwind CSS, Framer Motion, Radix UI                                 |
+| **Frontend**        | Next.js, Tailwind CSS, Framer Motion, Radix UI, Deepgram                                |
 | **Backend**         | Screenpipe Terminator, AI SDK, Groq SDK, Zod                                   |
 | **Database**        | Not applicable (future scope may include a DB layer)                          |
 | **Hosting**         | Vercel                                                                        |
@@ -84,6 +108,7 @@ KRATOS
 
 - **Demo Video Link:** [Add Link]
 - **Pitch Deck / PPT Link:** [Add Link]
+- **Deployed link: [https://payal-op-yin5.vercel.app/]**
 
 ---
 
@@ -109,7 +134,7 @@ KRATOS
 ```bash
 # Clone the repo
 git clone https://github.com/Praveendwivedi/AI-Assistant-Frontend.git
-cd install-it.ai
+cd AI-Assistant-Frontend
 
 # Create a .env file and add required API keys
 
@@ -126,6 +151,9 @@ Visit `http://localhost:3000` in your browser.
 
 ```bash
 # Open Screenpipe Terminator project directory
+git clone https://github.com/mediar-ai/terminator
+
+cd terminator
 
 # Setup for Windows (run only once)
 ./setup_windows.ps1
@@ -161,4 +189,3 @@ Ensure proper terminal/command-line permissions while executing.
 HackHazards'25 has been an incredible journey. From system-level scripting to designing a voice-controlled AI, we learned, iterated, and celebrated every little win. Huge thanks to the Namespace community for the amazing platform, mentorship, and camaraderie.
 
 Let's keep building the future of AI computer control! 🤖
-
